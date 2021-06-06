@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import '../models/transaction.dart';
 
 class TranscactionList extends StatelessWidget {
-  final List<Transcation> transcations;
+  final List<Transaction> transcations;
 
   TranscactionList(this.transcations);
 

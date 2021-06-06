@@ -1,4 +1,3 @@
-import 'package:expense_app/widgets/new_transcation.dart';
 import 'package:expense_app/widgets/transcation_list.dart';
 import 'package:flutter/material.dart';
 
@@ -6,46 +5,43 @@ import 'models/transaction.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   @override
-  _MyHomepageState createState() => _MyHomepageState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter App',
+      home: MyHomePage(),
+    );
+  }
 }
 
 // My Home Page
-class _MyHomepageState extends State<MyApp> {
+class MyHomePage extends StatefulWidget {
   // late String titleInput;
   // late String amountInput;
 
-  final List<Transcation> _userTransaction = [
-    Transcation(
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final List<Transaction> _userTranscation = [
+    Transaction(
         id: 't1', title: 'New Shoes', amount: 99.99, date: DateTime.now()),
-    Transcation(
-        id: 't2',
-        title: 'Weekly Veggies',
-        amount: 100.73,
-        date: DateTime.now()),
+    Transaction(
+        id: 't1', title: 'Week Veggies', amount: 150.75, date: DateTime.now()),
   ];
 
-  void _addTranscation(String title, double txamount) {
-    //print(title + " " + txamount.toString());
-
-    final nexTx = Transcation(
+  void _addNewTranscation(String txTitle, double txamount) {
+    final newTx = Transaction(
         id: DateTime.now().toString(),
-        title: title,
+        title: txTitle,
         amount: txamount,
         date: DateTime.now());
 
     setState(() {
-      _userTransaction.add(nexTx);
+      _userTranscation.add(newTx);
     });
-  }
-
-  void _startAddNewTranscation(BuildContext ctx) {
-    showModalBottomSheet(
-        context: ctx,
-        builder: (_) {
-          return NewTranscation(_addTranscation);
-        });
   }
 
   @override
@@ -55,7 +51,9 @@ class _MyHomepageState extends State<MyApp> {
         title: Text('Flutter App'),
         actions: <Widget>[
           IconButton(
-              onPressed: () => _startAddNewTranscation(context),
+              onPressed: () {
+                print('Button Clicked !!');
+              },
               icon: Icon(
                 Icons.add_box,
                 color: Colors.white,
@@ -75,14 +73,14 @@ class _MyHomepageState extends State<MyApp> {
                 elevation: 5,
               ),
             ),
-            TranscactionList(_userTransaction)
+            TranscactionList(_userTranscation)
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => _startAddNewTranscation(context),
+        onPressed: () {},
       ),
     );
   }
