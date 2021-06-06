@@ -1,3 +1,4 @@
+import 'package:expense_app/widgets/new_transcation.dart';
 import 'package:expense_app/widgets/transcation_list.dart';
 import 'package:flutter/material.dart';
 
@@ -44,6 +45,17 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _startNewTranscation(BuildContext ctx) {
+    showModalBottomSheet(
+        context: ctx,
+        builder: (_) {
+          return GestureDetector(
+            onTap: () {},
+            child: NewTranscation(_addNewTranscation),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,9 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text('Flutter App'),
         actions: <Widget>[
           IconButton(
-              onPressed: () {
-                print('Button Clicked !!');
-              },
+              onPressed: () => _startNewTranscation(context),
               icon: Icon(
                 Icons.add_box,
                 color: Colors.white,
@@ -80,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () => _startNewTranscation(context),
       ),
     );
   }
